@@ -1,10 +1,10 @@
 # flutter_study
 
-###Flutter Practice Repo
+### Flutter Practice Repo
 
 ------------
 
-##[How to use?]
+## [How to use?]
 > 1. Create flutter project
 > 2. copy to "lib" directory
 > 3. open "/lib/main.dart"
