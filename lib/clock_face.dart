@@ -1,12 +1,9 @@
+// ignore_for_file: prefer_const_constructors
+
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'dart:developer' as dev;
 import 'package:intl/intl.dart';
-
-/*
-    Project name : clockface
-    Explanation : stopwatch
- */
 
 class ClockFace extends StatelessWidget {
   const ClockFace({Key? key}) : super(key: key);
@@ -14,7 +11,7 @@ class ClockFace extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'test',
+      title: 'ClockFace',
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
@@ -24,14 +21,13 @@ class ClockFace extends StatelessWidget {
 }
 
 class ClockFaceStateful extends StatefulWidget {
+  const ClockFaceStateful({Key? key}) : super(key: key);
 
   @override
   State<StatefulWidget> createState() => ClockFaceStatefulState();
-
 }
 
-class ClockFaceStatefulState extends State<ClockFaceStateful>{
-
+class ClockFaceStatefulState extends State<ClockFaceStateful> {
   DateFormat formatter = DateFormat('HH:mm:ss');
   var now = DateTime.now();
 
@@ -45,17 +41,14 @@ class ClockFaceStatefulState extends State<ClockFaceStateful>{
         this.now = DateTime.now(); // why didn't work without 'this'..?
       });
     });
-
-    dev.log(formatter.format(now), name: "logtype:debug");
-
+    dev.log(formatter.format(now), name: "log type:debug");
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Center(
-          child: Text(formatter.format(now), style: TextStyle(fontSize:64))
-      ),
+          child: Text(formatter.format(now), style: TextStyle(fontSize: 64))),
     );
   }
 }
