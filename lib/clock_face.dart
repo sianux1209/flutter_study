@@ -48,7 +48,9 @@ class ClockFaceStatefulState extends State<ClockFaceStateful> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Center(
-          child: Text(formatter.format(now), style: TextStyle(fontSize: 64))),
+          child: Text(formatter.format(now), 
+          style: TextStyle(fontSize: 64))
+      ),
     );
   }
 }

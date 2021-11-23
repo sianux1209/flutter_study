@@ -3,6 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_study/clock_face.dart';
 import 'package:flutter_study/fortune_cookie.dart';
+import 'package:flutter_study/reminder.dart';
 
 /*
   [how to use?]
@@ -12,8 +13,9 @@ import 'package:flutter_study/fortune_cookie.dart';
   [Project List]
     1. clock_face
     2. fortune_cookie
+    3. remidner
 */
 
 void main() {
-  runApp(FortuneCookie());
+  runApp(Reminder());
 }
