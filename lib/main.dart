@@ -13,7 +13,7 @@ import 'package:flutter_study/reminder.dart';
   [Project List]
     1. clock_face
     2. fortune_cookie
-    3. remidner
+    3. remidner (incompleted)
 */
 
 void main() {
