@@ -1,15 +1,19 @@
+// ignore_for_file: prefer_const_constructors
+
 import 'package:flutter/material.dart';
-import 'clockface.dart';
+import 'package:flutter_study/clock_face.dart';
+import 'package:flutter_study/fortune_cookie.dart';
 
 /*
-  how to use?
+  [how to use?]
     >> choose the project and input runApp parameter of main function
     >> example runApp(ClockFace());
 
-  Project List
-    1. clockface
- */
+  [Project List]
+    1. clock_face
+    2. fortune_cookie
+*/
 
 void main() {
-  runApp(ClockFace());
+  runApp(FortuneCookie());
 }
