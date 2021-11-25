@@ -5,6 +5,7 @@ import 'package:flutter_study/clock_face.dart';
 import 'package:flutter_study/fortune_cookie.dart';
 import 'package:flutter_study/reminder.dart';
 import 'package:flutter_study/navigation.dart';
+import 'package:flutter_study/hand_test/hand_test.dart';
 
 /*
   [how to use?]
@@ -12,12 +13,13 @@ import 'package:flutter_study/navigation.dart';
     >> example runApp(ClockFace());
 
   [Project List]
-    1. clock_face
-    2. fortune_cookie
-    3. remidner
-    4. navigation
+    1. ClockFace()
+    2. FortuneCookie()
+    3. Reminder()
+    4. Navigation()
+    5. HandTest()
 */
 
 void main() {
-  runApp(Navigation());
+  runApp(HandTest());
 }

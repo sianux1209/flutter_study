@@ -44,18 +44,13 @@ class FortuneCookieState extends State<FortuneCookieStateful> {
     return Scaffold(
         body: Center(
             child:
-                Column(
-                  mainAxisAlignment: MainAxisAlignment.center, 
-                  children: [
-                    GestureDetector(
-                      onTap: shuffle,
-                      child: Image.network(url),
-                      ),
-                      Text(messages[0], 
-                          style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold))
-                  ]
-                )
-        )
-    );
+                Column(mainAxisAlignment: MainAxisAlignment.center, children: [
+      GestureDetector(
+        onTap: shuffle,
+        child: Image.network(url),
+      ),
+      Text(messages[0],
+          style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold))
+    ])));
   }
 }

@@ -1,4 +1,6 @@
 /*
 !.gitignore
 !README.md
-!/lib/
+!lib/
+!pubspec.yaml
+!VScodeExtension.md
