@@ -19,7 +19,7 @@ import 'package:flutter_study/juso_go_kr/juso_go_kr.dart';
     3. Reminder()
     4. Navigation()
     5. HandTest()
-    6. JusoGoKr() 
+    6. JusoGoKr()  * Need your API key juso.go.kr
 */
 
 void main() {

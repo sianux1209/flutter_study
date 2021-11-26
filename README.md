@@ -17,5 +17,5 @@
 ## how to check dependencies?
 > check 'pubspec.yaml' → below 'dependencies:'
 
-## how to use assest image?
+## how to use assest image or file?
 > enable assest option at 'pubspec.yaml'
