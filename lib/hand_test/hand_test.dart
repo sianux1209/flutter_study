@@ -8,18 +8,19 @@ class HandTest extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-        title: 'HandTest',
-        theme: ThemeData(
-          primarySwatch: Colors.blue,
-        ),
-        initialRoute: '/',
-        routes: {
-          '/': (context) => HandList(),
-          '/results/1': (context) => ResultA(),
-          '/results/2': (context) => ResultB(),
-          '/results/3': (context) => ResultC(),
-          '/results/4': (context) => ResultD(),
-        });
+      title: 'HandTest',
+      theme: ThemeData(
+        primarySwatch: Colors.blue,
+      ),
+      initialRoute: '/',
+      routes: {
+        '/': (context) => HandList(),
+        '/results/1': (context) => ResultA(),
+        '/results/2': (context) => ResultB(),
+        '/results/3': (context) => ResultC(),
+        '/results/4': (context) => ResultD(),
+      },
+    );
   }
 }
 
