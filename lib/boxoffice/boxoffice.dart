@@ -1,10 +1,13 @@
-// ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables, must_be_immutable
+// ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables, must_be_immutable, prefer_const_constructors_in_immutables
+
+// * Used func : http, json, MaterialPageRoute, CircularProgressIndicator
 
 import 'dart:async';
 import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:http/http.dart' as http;
+import '../apikey.dart';
 
 class Boxoffice extends StatelessWidget {
   const Boxoffice({Key? key}) : super(key: key);
@@ -29,7 +32,7 @@ class BoxofficeSF extends StatefulWidget {
 }
 
 class BoxofficeS extends State<BoxofficeSF> {
-  String apiKey = 'eda4efb8e2489160524434831c195bd1';
+  String key = boxofficeApiKey; // input your boxoffice(kobis.or.kr) api key
   DateTime date = DateTime.now().subtract(Duration(days: 1));
   List list = [];
   DateFormat requestFormat = DateFormat('yyyyMMdd');
@@ -44,7 +47,7 @@ class BoxofficeS extends State<BoxofficeSF> {
 
     var url =
         'https://www.kobis.or.kr/kobisopenapi/webservice/rest/boxoffice/searchDailyBoxOfficeList.json';
-    url += '?key=$apiKey';
+    url += '?key=$key';
     url += '&targetDt=${requestFormat.format(date)}';
 
     var response = await http.get(Uri.parse(url));
@@ -116,7 +119,7 @@ class BoxofficeS extends State<BoxofficeSF> {
                           context,
                           MaterialPageRoute(
                               builder: (context) =>
-                                  MovieDetail(list[index]['movieCd'], apiKey)),
+                                  MovieDetail(list[index]['movieCd'], key)),
                         );
                       },
                       child: Text(
@@ -167,10 +170,11 @@ class _MovieDetailState extends State<MovieDetail> {
   Widget build(BuildContext context) {
     if (movie == null) {
       return Scaffold(
-          body: Center(
-        child: CircularProgressIndicator(),
-        //LinearProgressIndicator(),
-      ));
+        body: Center(
+          child: CircularProgressIndicator(),
+          //LinearProgressIndicator(),
+        ),
+      );
     } else {
       return Scaffold(
         appBar: AppBar(
@@ -193,7 +197,17 @@ class _MovieDetailState extends State<MovieDetail> {
                     return Text("출연 :");
                   }
                   List actors = movie['movieInfoResult']['movieInfo']['actors'];
-                  return (Text('${actors[index]['peopleNm']}'));
+                  return GestureDetector(
+                    onTap: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => ActorList(
+                                actors[index]['peopleNm'], widget.apiKey),
+                          ));
+                    },
+                    child: (Text('${actors[index]['peopleNm']}')),
+                  );
                 },
               ),
             ),
@@ -201,5 +215,129 @@ class _MovieDetailState extends State<MovieDetail> {
         ),
       );
     }
+  }
+}
+
+class ActorList extends StatefulWidget {
+  String name;
+  String apiKey;
+  ActorList(this.name, this.apiKey, {Key? key}) : super(key: key);
+
+  @override
+  ActorListState createState() => ActorListState();
+}
+
+class ActorListState extends State<ActorList> {
+  List list = [];
+
+  void load() async {
+    var url =
+        'https://www.kobis.or.kr/kobisopenapi/webservice/rest/people/searchPeopleList.json';
+    url += '?key=${widget.apiKey}';
+    url += '&peopleNm=${widget.name}';
+
+    var response = await http.get(Uri.parse(url));
+    var data = jsonDecode(response.body);
+
+    setState(() {
+      list = data['peopleListResult']['peopleList'];
+    });
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    load();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(title: Text('배우 검색 결과')),
+      body: ListView.builder(
+        itemCount: list.length,
+        itemBuilder: (BuildContext context, int index) {
+          return GestureDetector(
+            child: Padding(
+              padding: const EdgeInsets.all(12.0),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: <Widget>[
+                  GestureDetector(
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => PeopleDetail(
+                              list[index]['peopleCd'], widget.apiKey),
+                        ),
+                      );
+                    },
+                    child: Text(list[index]['peopleNm']),
+                  ),
+                  Text('대표작: ' + list[index]['filmoNames']),
+                ],
+              ),
+            ),
+          );
+        },
+      ),
+    );
+  }
+}
+
+class PeopleDetail extends StatefulWidget {
+  var people;
+  String code;
+  String apiKey;
+  PeopleDetail(this.code, this.apiKey, {Key? key}) : super(key: key);
+
+  @override
+  _PeopleDetailState createState() => _PeopleDetailState();
+}
+
+class _PeopleDetailState extends State<PeopleDetail> {
+  var people;
+
+  void load() async {
+    var url =
+        'https://www.kobis.or.kr/kobisopenapi/webservice/rest/people/searchPeopleInfo.json';
+    url += '?key=${widget.apiKey}';
+    url += '&peopleCd=${widget.code}';
+
+    var response = await http.get(Uri.parse(url));
+
+    var data = jsonDecode(response.body);
+    setState(() {
+      people = data;
+    });
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    load();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    if (people == null)
+      // ignore: curly_braces_in_flow_control_structures
+      return Scaffold(
+        body: Center(
+          child: CircularProgressIndicator(),
+        ),
+      );
+    return Scaffold(
+      appBar: AppBar(title: Text("영화인 상세 조회")),
+      body: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: <Widget>[
+          Text('이름: ${people['peopleInfoResult']['peopleInfo']['peopleNm']}'),
+          Text('성별: ${people['peopleInfoResult']['peopleInfo']['sex']}'),
+          Text('역할: ${people['peopleInfoResult']['peopleInfo']['repRoleNm']}'),
+        ],
+      ),
+    );
   }
 }

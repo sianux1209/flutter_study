@@ -21,7 +21,7 @@ import 'package:flutter_study/juso_go_kr/juso_go_kr.dart';
     4. Navigation()
     5. HandTest()
     6. JusoGoKr()  * Need your API key juso.go.kr
-    7. Boxoffice() * Need your API key 
+    7. Boxoffice() * Need your API key kobis.or.kr
 */
 
 void main() {
