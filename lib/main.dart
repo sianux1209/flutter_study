@@ -1,4 +1,4 @@
-// ignore_for_file: prefer_const_constructors
+// ignore_for_file: prefer_const_constructors, unused_import
 
 import 'dart:async';
 import 'package:flutter/material.dart';
@@ -12,6 +12,7 @@ import 'package:flutter_study/hand_test/hand_test.dart';
 import 'package:flutter_study/juso_go_kr/juso_go_kr.dart';
 import 'package:flutter_study/firebase/analytics.dart';
 import 'package:flutter_study/firebase/auth.dart';
+import 'package:flutter_study/firebase/firestore.dart';
 
 /*
   [how to use?]
@@ -28,11 +29,12 @@ import 'package:flutter_study/firebase/auth.dart';
     7. Boxoffice() * Need your API key kobis.or.kr
     8. FlutterfireAnalytics()
     9. FlutterfireAuth()
+    10. FiresotreFlutter()
 */
 
 void main() async {
   WidgetsFlutterBinding
       .ensureInitialized(); // if you use firebase enable this line
   await Firebase.initializeApp(); // if you use firebase enable this line
-  runApp(FlutterfireAuth());
+  runApp(FiresotreFlutter());
 }
