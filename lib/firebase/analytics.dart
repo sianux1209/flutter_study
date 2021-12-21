@@ -16,6 +16,7 @@ class FlutterfireAnalytics extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
+      navigatorObservers: <NavigatorObserver>[observer],
       home: AnalyticsSF(analytics, observer),
     );
   }
